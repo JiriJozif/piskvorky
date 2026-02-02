@@ -1,7 +1,7 @@
 # Hra piškvorky (tic tac toe)
 
 Jednoduchá konzolová hra v Pythonu.
-
+***
 ## Spuštění
 ```
 python piskvorky.py
