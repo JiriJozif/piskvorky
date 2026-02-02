@@ -11,3 +11,5 @@ python piskvorky.py
 - Pokud mám možnost vyhrát, udělám to
 - Pokud by měl vyhrát soupeř, blokuji jej 
 - Jinak hraji náhodně
+
+2026-02-02
