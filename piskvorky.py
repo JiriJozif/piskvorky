@@ -1,17 +1,17 @@
 import random
 
 class Grid:
-    MAX = 3
+    _MAX = 3
 
     def __init__(self):
-        self.grid = [[" " for _ in range(self.MAX)] for _ in range(self.MAX)]
+        self.grid = [[" " for _ in range(self._MAX)] for _ in range(self._MAX)]
 
     def show(self):
         print("\n")
-        print("   " + "   ".join(map(str, range(self.MAX))))
-        line = "  " + "-" * (4 * self.MAX - 1)
+        print("   " + "   ".join(map(str, range(self._MAX))))
+        line = "  " + "-" * (4 * self._MAX - 1)
         print(line)
-        for r in range(self.MAX):
+        for r in range(self._MAX):
             row_label = chr(r + ord("a"))
             row = " | ".join(self.grid[r])
             print(f"{row_label}| {row} |")
@@ -19,7 +19,7 @@ class Grid:
         print()
 
     def is_full(self):
-        return all(self.grid[r][c] != " " for r in range(self.MAX) for c in range(self.MAX))
+        return all(self.grid[r][c] != " " for r in range(self._MAX) for c in range(self._MAX))
 
     def is_winner(self, mark):
         # řádky
@@ -27,13 +27,13 @@ class Grid:
             if all(cell == mark for cell in row):
                 return True
         # sloupce
-        for column in range(self.MAX):
-            if all(self.grid[r][column] == mark for r in range(self.MAX)):
+        for column in range(self._MAX):
+            if all(self.grid[r][column] == mark for r in range(self._MAX)):
                 return True
         # diagonály
-        if all(self.grid[i][i] == mark for i in range(self.MAX)):
+        if all(self.grid[i][i] == mark for i in range(self._MAX)):
             return True
-        if all(self.grid[i][self.MAX - 1 - i] == mark for i in range(self.MAX)):
+        if all(self.grid[i][self._MAX - 1 - i] == mark for i in range(self._MAX)):
             return True
         return False
 
@@ -59,7 +59,7 @@ class Player:
                 print("Chybně zadaný tah, musí být ve tvaru rs, například b1.")
                 continue
 
-            if 0 <= r < grid.MAX and 0 <= c < grid.MAX and grid.is_free(r, c):
+            if 0 <= r < grid._MAX and 0 <= c < grid._MAX and grid.is_free(r, c):
                 grid.set_move(r, c, self.mark)
                 break
             else:
@@ -76,7 +76,7 @@ class Computer:
         for r, c in self.free_cells(grid):
             grid.set_move(r, c, self.mark)
             if grid.is_winner(self.mark):
-                #print(f"Počítač táhne na {r}, {c} (výhra)")
+                #print(f"Počítač táhne na {chr(r + ord("a"))}{c} (výhra)")
                 return True
             grid.set_move(r, c, " ")
 
@@ -85,18 +85,18 @@ class Computer:
             grid.set_move(r, c, self.opponent)
             if grid.is_winner(self.opponent):
                 grid.set_move(r, c, self.mark)
-                #print(f"Počítač táhne na {r}, {c} (blokuje)")
+                #print(f"Počítač táhne na {chr(r + ord("a"))}{c} (blokuje)")
                 return True
             grid.set_move(r, c, " ")
 
         # 3. jinak náhodně
         r, c = random.choice(self.free_cells(grid))
         grid.set_move(r, c, self.mark)
-        #print(f"Počítač táhne na {r}, {c} (náhodně)")
+        #print(f"Počítač táhne na {chr(r + ord("a"))}{c} (náhodně)")
         return True
 
     def free_cells(self, grid: Grid):
-        return [(r, c) for r in range(grid.MAX) for c in range(grid.MAX) if grid.is_free(r, c)]
+        return [(r, c) for r in range(grid._MAX) for c in range(grid._MAX) if grid.is_free(r, c)]
 
 class Game:
     def __init__(self):
