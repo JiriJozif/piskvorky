@@ -12,5 +12,3 @@ python piskvorky.py
 - Pokud by měl vyhrát soupeř, blokuji jej 
 - Jinak hraji náhodně
 
-***
-# 21.5.2026
