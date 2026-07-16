@@ -12,3 +12,6 @@ python piskvorky.py
 - Pokud by měl vyhrát soupeř, blokuji jej 
 - Jinak hraji náhodně
 
+---
+Ahoj
+---
